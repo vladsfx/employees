@@ -22,6 +22,14 @@ class App extends Component {
         this.index = this.state.data.length;
     }
 
+    count = () => {
+        let i = 0;
+        this.state.data.forEach(item => {
+            if (item.increase)
+                i++;
+        });
+        return i;
+    }
 
 
     deleteItem = (id) => {
@@ -81,9 +89,13 @@ class App extends Component {
     };
 
     render() {
+        const employees = this.index;
+        const increased = this.state.data.filter(item => item.increase).length;
         return (
             <div className="app">
-                <AppInfo />
+                <AppInfo
+                    employees={employees}
+                    increased={increased} />
 
                 <div className="search-panel">
                     <SearchPanel />
