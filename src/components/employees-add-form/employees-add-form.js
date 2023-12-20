@@ -11,15 +11,45 @@ class EmployeesAddForm extends Component {
         };
     }
 
+    onAddAlert = (flag = true) => {
+        const error = document.querySelector('.alert');
+        const inputs = document.querySelectorAll(".form-control");
+
+        if (flag) {
+            inputs.forEach(item => {
+                item.classList.remove('red');
+            });
+
+            error.classList.add('hide');
+        }
+        else {
+            inputs.forEach(item => {
+                item.classList.add('red');
+            });
+
+            error.classList.remove('hide');
+        }
+    }
+
     onValueChange = (e) => {
+        this.onAddAlert();
         this.setState({
             [e.target.name]: e.target.value
         });
     }
 
+
+
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onAdd(this.state.name, this.state.salary);
+
+        if (this.state.name.trim().length >= 3 && +this.state.salary > 50) {
+            this.onAddAlert()
+            this.props.onAdd(this.state.name, this.state.salary);
+        } else {
+            this.onAddAlert(false);
+        }
+
         this.setState({
             name: '',
             salary: ''
@@ -51,6 +81,7 @@ class EmployeesAddForm extends Component {
                         Добавить
                     </button>
                 </form>
+                <p className='alert hide'>Поля заполнены некорректно. Повторите ввод</p>
             </div>
         );
     }
