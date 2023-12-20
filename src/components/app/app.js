@@ -22,16 +22,6 @@ class App extends Component {
         this.index = this.state.data.length;
     }
 
-    count = () => {
-        let i = 0;
-        this.state.data.forEach(item => {
-            if (item.increase)
-                i++;
-        });
-        return i;
-    }
-
-
     deleteItem = (id) => {
         this.setState(({ data }) => ({
             data: data.filter(item => item.id !== id)
@@ -89,7 +79,7 @@ class App extends Component {
     };
 
     render() {
-        const employees = this.index;
+        const employees = this.state.data.length;
         const increased = this.state.data.filter(item => item.increase).length;
         return (
             <div className="app">
