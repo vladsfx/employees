@@ -26,8 +26,8 @@ class EmployeesAddForm extends Component {
             inputs.forEach(item => {
                 item.classList.add('red');
             });
-
-            error.classList.remove('hide');
+    
+            error.classList.remove('hide');    
         }
     }
 
@@ -43,11 +43,11 @@ class EmployeesAddForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        if (this.state.name.trim().length >= 3 && +this.state.salary > 50) {
+        if (this.state.name.trim().length >= 3 && +this.state.salary >= 50) {
             this.onAddAlert()
             this.props.onAdd(this.state.name, this.state.salary);
         } else {
-            this.onAddAlert(false);
+            this.onAddAlert(false)
         }
 
         this.setState({
@@ -81,7 +81,7 @@ class EmployeesAddForm extends Component {
                         Добавить
                     </button>
                 </form>
-                <p className='alert hide'>Поля заполнены некорректно. Повторите ввод</p>
+                <p className='alert hide'>Поля заполнены некорректно. Имя - не меньше 3 букв, зарплата - не менее 50$</p>
             </div>
         );
     }
